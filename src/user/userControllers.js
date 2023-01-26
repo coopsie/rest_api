@@ -37,7 +37,7 @@ exports.login = async (request, response) => {
 
 exports.updateEmail = async (request, response) => {
     try {
-        await User.updateOne({username: request.user.username}, {email: request.body.newemail})
+        await User.updateOne({username: request.user.username}, {email: request.body.email})
         response.send({msg: "User email updated."});
         console.log("User email updated.");
     } catch (error) {

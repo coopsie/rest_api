@@ -4,7 +4,7 @@ const User = require("../user/userModels");
 
 exports.hashPass = async(request, response, next) => {
     try {
-        // take a password out of the body, hash (encrypt) it using bcrypt
+        // Take a password out of the body, hash (encrypt) it using bcrypt
         // and then put back the encrypted password to overwrite the unencrypted 
         // password and then pass on the updated body to the next function
         // which will be createUser.
@@ -12,16 +12,16 @@ exports.hashPass = async(request, response, next) => {
         const passwordCopy = request.body.password;
         const hashedPass = await bcrypt.hash(passwordCopy, 8);
         console.log(hashedPass);
-        // the first parameter of hash is the plain text password to be encrypted
+        // The first parameter of hash is the plain text password to be encrypted
         // the second parameter is the 'salt' which is the amount of encrypting that
         // is carried out. More 'salt' (higher number) gives better encryption
         // but takes longer.
 
         request.body.password = hashedPass;
-        // here we overwrite the unencrypted password with the encrypted version.
+        // Here we overwrite the unencrypted password with the encrypted version.
 
         next();
-        // is the next middleware function to be invoked.
+        // Is the next middleware function to be invoked.
 
     } catch (error) {
         console.log(error);
